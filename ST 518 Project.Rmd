@@ -53,21 +53,25 @@ corr_data <- data %>%
 ggpairs(corr_data)
 ```
 
-Description of plot below and conclusions.  
+The box plot of time as a function of brand gives an indication that there is an effect of the two brands on time.  
 
-```{r plot1}
+```{r Box plot- time as a function of brand}
+boxplot(data$Time~data$Brand, col="light blue", xlab="Brand", ylab="Time")
 
-```
-
-Description of plot below and conclusions.  
-
-```{r plot2}
 
 ```
 
-Description of plot below and conclusions.  
+The box plot of time as a function of stirred status gives an indication that there is an effect of the stirred status on time.  
 
-```{r plot3}
+```{r Box plot- time as a function of stirred status }
+boxplot(data$Time~data$Stirred, col="light blue", xlab="Stirred", ylab="Time")
+
+```
+
+The box plot of time as a function of temperature gives an indication that there is an effect of the different temperatures on time. 
+
+```{r Box plot- time as a function of temperature }
+boxplot(data$Time~data$Temp, col="light blue", xlab="Temperature", ylab="Time")
 
 ```
 
@@ -80,6 +84,22 @@ Description of plot below and conclusions.
 
 # Analysis and Results  
 *Fit appropriate models and follow good statistical analysis process to determine the best model to use. Make use of proper diagnostics. Choose the appropriate effects to compare, correctly estimate and test significance of the effects and trends.*  
+
+# Fit model (no interaction)
+amod <- aov(Time~Brand+Temp+Stirred,data=data)
+par(mfrow=c(2,2), mar=c(2, 2, 2, 2))
+plot(amod, pch=19)
+par(mfrow=c(1,1), mar=c(5.1, 4.1, 4.1, 2.1))
+summary(amod)
+
+# Fit model (With interaction)
+amodint <- aov(Time~Brand*Temp*Stirred,data=data)
+par(mfrow=c(2,2), mar=c(2, 2, 2, 2))
+plot(amod, pch=19)
+par(mfrow=c(1,1), mar=c(5.1, 4.1, 4.1, 2.1))
+summary(amodint)
+
+
 
 
 # Conclusion  
